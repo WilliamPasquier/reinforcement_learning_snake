@@ -9,19 +9,35 @@ pygame.init()
 
 # Class definition
 class SnakeRLGame:
-    def __init__(self, w=rlsgame.Settings.WINDOW_WIDTH.value, h=rlsgame.Settings.WINDOW_HEIGHT.value):
-       self.w = w
-       self.h = h
+    def __init__(
+            self, 
+            w=rlsgame.Settings.WINDOW_WIDTH.value,
+            h=rlsgame.Settings.WINDOW_HEIGHT.value
+        ):
+        # Declare properties
+        self.w = w
+        self.h = h
+        self.score = 0
+        self.food = None
+        self.frame_iteration = 0
+        self.direction = 0
+        
+        # Init display
+        self.display = pygame.display.set_mode((self.w, self.h))
+        pygame.display.set_caption("Reinforcement Learning Snake")
 
-       # Init display
-       self.display = pygame.display.set_mode((self.w, self.h))
-       pygame.display.set_caption("Reinforcement Learning Snake")
+        # Init pygame ticking
+        self.clock = pygame.time.Clock()
 
-       # Init pygame ticking
-       self.clock = pygame.time.Clock()
-       self.reset()
+        # Set base value
+        self.reset()
        
     def reset(self):
+        self.score = 0
+        self.food = None
+        self.frame_iteration = 0
+        self.direction = 0
+        
         self.head = point(self.w / 2, self.h / 2)
         self.snake = [
             self.head,
@@ -29,57 +45,79 @@ class SnakeRLGame:
             point(self.head.x - (2 * rlsgame.Settings.BLOCK_SIZE.value), self.head.y)
         ]
 
-        self.score = 0
-        self.food = None
         self.__place_food()
-        self.frame_iteration = 0
+
 
     def __place_food(self):
         x_coordonate = randint(0, (self.w - rlsgame.Settings.BLOCK_SIZE.value) // rlsgame.Settings.BLOCK_SIZE.value) * rlsgame.Settings.BLOCK_SIZE.value
-        y_coordonate = randint(0, (self.w - rlsgame.Settings.BLOCK_SIZE.value) // rlsgame.Settings.BLOCK_SIZE.value) * rlsgame.Settings.BLOCK_SIZE.value
+        y_coordonate = randint(0, (self.h - rlsgame.Settings.BLOCK_SIZE.value) // rlsgame.Settings.BLOCK_SIZE.value) * rlsgame.Settings.BLOCK_SIZE.value
         self.food = point(x_coordonate, y_coordonate)
         if self.food in self.snake:
             self.__place_food()
 
     def play_step(self):
+        reward = 0
+        game_over = False
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_w] and self.direction != rlsgame.Direction.DOWN.value:
+            self.direction = rlsgame.Direction.UP.value
+
+        if keys[pygame.K_s] and self.direction != rlsgame.Direction.UP.value:
+            self.direction = rlsgame.Direction.DOWN.value
+
+        if keys[pygame.K_a] and self.direction != rlsgame.Direction.RIGHT.value:
+            self.direction = rlsgame.Direction.LEFT.value
+
+        if keys[pygame.K_d] and self.direction != rlsgame.Direction.LEFT.value:
+            self.direction = rlsgame.Direction.RIGHT.value
+
         self.__move()
 
         self.__hit_border()
 
-        if self.head == self.food:
-            self.score += 10
+        if self.head == self.food:      #if the x and y coordonate of the tuple same -> food ate
+            self.score += 1
+            reward += 10
             self.__place_food()
             print(f"Food ate, score : {self.score}")
         else:
             self.snake.pop()
 
+        if self.is_collision():
+            game_over = True
+            reward -= 10  
+            return game_over, reward, self.score
+
         self.__update_ui()
         self.clock.tick(rlsgame.Settings.SPEED.value)
+
+        return game_over, reward, self.score
 
     def __hit_border(self):
         x_coordonate = self.head.x
         y_coordonate = self.head.y
 
         # Check if hit up border
-        if self.head.y == -(rlsgame.Settings.BLOCK_SIZE.value):
+        if self.head.y <= -(rlsgame.Settings.BLOCK_SIZE.value):
             y_coordonate = self.h
             
         # Check if hit down border
-        if self.head.y == self.h + rlsgame.Settings.BLOCK_SIZE.value:
-            y_coordonate = 0
+        if self.head.y >= self.h + rlsgame.Settings.BLOCK_SIZE.value:
+            y_coordonate = -(rlsgame.Settings.BLOCK_SIZE.value)
 
         # Check if hit left border
-        if self.head.x == -(rlsgame.Settings.BLOCK_SIZE.value):
+        if self.head.x <= -(rlsgame.Settings.BLOCK_SIZE.value):
             x_coordonate = self.w
 
         # Check if hit right border
-        if self.head.x == self.w + rlsgame.Settings.BLOCK_SIZE.value:
-            x_coordonate = 0
+        if self.head.x >= self.w + rlsgame.Settings.BLOCK_SIZE.value:
+            x_coordonate = -(rlsgame.Settings.BLOCK_SIZE.value)
 
         self.head = point(x_coordonate, y_coordonate)
 
@@ -136,20 +174,21 @@ class SnakeRLGame:
 
         pygame.display.flip()
         
-    def __move(self):
+    def __move(self) -> None:
         x_coordonate = self.head.x
         y_coordonate = self.head.y
 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
+        if self.direction == rlsgame.Direction.UP.value:
             y_coordonate -= rlsgame.Settings.BLOCK_SIZE.value
-        if keys[pygame.K_s]:
+
+        if self.direction == rlsgame.Direction.DOWN.value:
             y_coordonate += rlsgame.Settings.BLOCK_SIZE.value
-        if keys[pygame.K_a]:
+
+        if self.direction == rlsgame.Direction.LEFT.value:
             x_coordonate -= rlsgame.Settings.BLOCK_SIZE.value
-        if keys[pygame.K_d]:
+
+        if self.direction == rlsgame.Direction.RIGHT.value:
             x_coordonate += rlsgame.Settings.BLOCK_SIZE.value
 
         self.head = point(x_coordonate, y_coordonate)
         self.snake.insert(0,  self.head)
-

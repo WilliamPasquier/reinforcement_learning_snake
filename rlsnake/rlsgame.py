@@ -12,7 +12,7 @@ class Settings(Enum):
     WINDOW_WIDTH = 1280
     WINDOW_HEIGHT = 720
     BLOCK_SIZE = 20
-    SPEED = 60
+    SPEED = 15
 
 class Direction(Enum):
     UP = 0

@@ -26,7 +26,11 @@ def train():
     game = SnakeRLGame()
 
     while True:
-        game.play_step()
+        is_done, reward, score = game.play_step()
+
+        if is_done:
+            game.reset()
+
 
 if __name__ == '__main__':
     print("Reinforcement Learning Snake agent")
