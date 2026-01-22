@@ -45,7 +45,7 @@ Sur Windows :
 rl_snake\\Scripts\\activate
 ```
 
-### 4️⃣ Installer les dépendances
+### Installer les dépendances
 
 ```bash
 pip install -r requirements.txt
@@ -67,5 +67,3 @@ Une fenêtre `pygame` s'ouvrira et affichera l'agent en train d'apprendre à jou
 
 Créé par **[William Pasquier](https://github.com/WilliamPasquier)**\
 README rédigé par ChatGPT (Un peu la flemme de tout taper et formater)
-
-
