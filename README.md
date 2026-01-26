@@ -56,7 +56,7 @@ pip install -r requirements.txt
 Pour démarrer l'agent et le jeu Snake :
 
 ```bash
-python agent.py
+python app.py
 ```
 
 Une fenêtre `pygame` s'ouvrira et affichera l'agent en train d'apprendre à jouer.
