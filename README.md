@@ -63,6 +63,62 @@ Une fenêtre `pygame` s'ouvrira et affichera l'agent en train d'apprendre à jou
 
 ---
 
+## Fonctionnement
+
+### Algorithme
+
+L’algorithme utilisé pour rendre l’agent autonome est le Deep Q-Learning, un algorithme d’apprentissage par renforcement. Son principe est d’apprendre par l’expérience, de manière similaire à un essai-erreur.
+
+L’agent interagit avec son environnement en effectuant des actions. Après chaque action, l’environnement lui renvoie un état, c’est-à-dire une description de la situation dans laquelle il se trouve, ainsi qu’une récompense. Cette récompense permet d’évaluer si l’action effectuée rapproche ou non l’agent de l’objectif fixé.
+
+Lorsque l’action contribue à atteindre l’objectif, l’agent reçoit une récompense positive ; dans le cas contraire, il est pénalisé. À partir de ces retours successifs, l’agent ajuste progressivement sa stratégie afin de choisir, à terme, les actions les plus pertinentes pour maximiser la récompense cumulée et accomplir sa tâche de manière autonome.
+
+<div style="display: flex; justify-content: center;">
+  <img src="./images/rl_snake.svg" width="75%">
+</div>
+
+L'état de chaque étape est constitué sous la forme d'une liste composée selon le format suivant :
+```python
+# 11 informations (0: si faux, 1: si vrai)
+[
+  # Danger en face (point de vue du mouvement de l'agent),
+  # Danger à droite (point de vue du mouvement de l'agent),
+  # Danger à gauche (point de vue du mouvement de l'agent),
+  # Direction haut (point de vue de l'environnement),
+  # Direction droite (point de vue de l'environnement),
+  # Direction bas (point de vue de l'environnement),
+  # Direction gauche (point de vue de l'environnement),
+  # Coordonnée x de la nouriture < que la coordonnée x de la tête de l'agent,
+  # Coordonnée x de la nouriture > que la coordonnée x de la tête de l'agent,
+  # Coordonnée y de la nouriture < que la coordonnée y de la tête de l'agent,
+  # Coordonnée y de la nouriture > que la coordonnée y de la tête de l'agent,
+]
+
+# Exemple d'état
+state = [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0]
+```
+
+### Personnalisation
+
+Les paramètres du projet se trouvent dans le module **rlsnake**, il est possible de les modifier afin de changer l'application ainsi que son fonctionnement.
+
+Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la logique et le fonctionnement du projet.
+
+### Résultat
+
+---
+
+<div style="display: flex; gap: 25px; justify-content: center; align-items: center">
+  <div width="50%">
+    <h4>Départ 0 - 10 epoch</h4>
+    <img src="./images/RLSNAKE_0th_epoch.gif" width="100%">
+  </div>
+  <div width="50%">
+    <h4>Après ~ 800 epoch</h4>
+    <img src="./images/RLSNAKE_800th_epoch.gif" width="100%">
+  </div>
+</div>
+
 ## Auteur
 
 Créé par **[William Pasquier](https://github.com/WilliamPasquier)**\
