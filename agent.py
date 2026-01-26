@@ -6,7 +6,7 @@ from rlsnake import rlsmodel
 
 class Agent:
     '''
-    Docstring pour Agent
+    Agent class containing the model and the training logic.
     '''
     def __init__(self):
         self.n_games = 0
@@ -21,9 +21,21 @@ class Agent:
         self.trainer = QTrainer(self.model, rlsmodel.Memory.LEARNING_RATE.value, self.gamma)
 
     def remember(self, previous_state, action, reward, new_state, is_done) -> None:
+        '''
+        Remember action and states differences
+        
+        :param previous_state: State before movement
+        :param action: Action performed by the agent
+        :param reward: How well the action was
+        :param new_state: New state after movement
+        :param is_done: If the game is over (collsion / out of iteration)
+        '''
         self.memory.append((previous_state, action, reward, new_state, is_done))
     
     def train_long_memory(self) -> None:
+        '''
+        Train model long memory
+        '''
         if len(self.memory) > rlsmodel.Memory.BATCH_SIZE.value:
             mini_sample = random.sample(self.memory, rlsmodel.Memory.BATCH_SIZE.value)
         else:
@@ -33,9 +45,25 @@ class Agent:
         self.trainer.train_step(previous_states, actions, rewards, new_states, is_dones)
         
     def train_short_memory(self, previous_state, action, reward, new_state, is_done) -> None:
+        '''
+        Train model short memory
+        
+        :param previous_state: Game state before movement
+        :param action: Action performed by the agent
+        :param reward: How well the action was
+        :param new_state: New game state after movement
+        :param is_done: If the game is over (collsion / out of iteration)
+        '''
         self.trainer.train_step(previous_state, action, reward, new_state, is_done)
 
     def get_action(self, state) -> list:
+        '''
+        Get action the agent will performed based on randomness or not
+        
+        :param state: Game sate
+        :return: List of possible action
+        :rtype: list
+        '''
         self.epsilon = 80 - self.n_games
         final_move = [0, 0, 0]
         if random.randint(0, 200) < self.epsilon:
