@@ -73,9 +73,9 @@ L’agent interagit avec son environnement en effectuant des actions. Après cha
 
 Lorsque l’action contribue à atteindre l’objectif, l’agent reçoit une récompense positive ; dans le cas contraire, il est pénalisé. À partir de ces retours successifs, l’agent ajuste progressivement sa stratégie afin de choisir, à terme, les actions les plus pertinentes pour maximiser la récompense cumulée et accomplir sa tâche de manière autonome.
 
-<div style="display: flex; justify-content: center;">
+<p align="center">
   <img src="./images/rl_snake.svg" width="75%">
-</div>
+</p>
 
 L'état de chaque étape est constitué sous la forme d'une liste composée selon le format suivant :
 ```python
@@ -107,17 +107,13 @@ Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la l
 ### Résultat
 
 ---
-
-<div style="display: flex; gap: 25px; justify-content: center; align-items: center">
-  <div width="50%">
-    <h4>Départ 0 - 10 epoch</h4>
-    <img src="./images/RLSNAKE_0th_epoch.gif" width="100%">
-  </div>
-  <div width="50%">
-    <h4>Après ~ 800 epoch</h4>
-    <img src="./images/RLSNAKE_800th_epoch.gif" width="100%">
-  </div>
-</div>
+<p style="font-size:25px">
+<pre>              <b>Départ ~ 0-10ème epoch</b>                                           <b>Après ~ 800 epoch</pre>
+</p>
+<p >
+  <img src="./images/RLSNAKE_0th_epoch.gif" width="50%" align="left">
+  <img src="./images/RLSNAKE_800th_epoch.gif" width="50%" align="right">
+</p>
 
 ## Auteur
 
