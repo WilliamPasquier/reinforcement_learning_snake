@@ -1,14 +1,18 @@
+import sys
 from agent import Agent
 from game import SnakeRLGame
 from helper import plot
 from rlsnake import rlshelper
 
-def train() -> None:
+def train(game: SnakeRLGame, agent:Agent) -> None:
     '''
-    Train the agent
+    Docstring pour train
+    
+    :param game: Game instance
+    :type game: SnakeRLGame
+    :param agent: Agent instance
+    :type agent: Agent
     '''
-    game = SnakeRLGame()
-    agent = Agent()
     record = 0
 
     # Plot list
@@ -32,7 +36,7 @@ def train() -> None:
 
             # Save model
             if rlshelper.Settings.SAVE_MODEL.value and score > record:
-                agent.save_model()
+                agent.save_model(score)
                 record = score
 
             # Plot score and mean score
@@ -45,4 +49,13 @@ def train() -> None:
 
 if __name__ == '__main__':
     print("Reinforcement Learning Snake agent")
-    train()
+
+    # Create instances
+    environnement = SnakeRLGame()
+    agent = Agent()
+
+    if len(sys.argv) > 1:
+        model_path = sys.argv[1]
+        agent.load_model(model_path)
+        
+    train(environnement, agent)

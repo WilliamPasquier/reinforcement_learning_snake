@@ -79,14 +79,25 @@ class Agent:
 
         return final_move
     
-    def save_model(self):
+    def save_model(self, score) -> None:
         '''
         Save model
         '''
         now = datetime.now()
         date_str = now.strftime("%Y-%m-%d")
+        hour_str = now.strftime("%H-%M-%S")
 
         model_path = os.path.join(rlshelper.Settings.MODEL_PATH.value, date_str)
-        file_name = f'model_epoch_{self.n_games}.pth'
+        file_name = f'model_{hour_str}_score-{score}_epoch-{self.n_games}.pth'
 
         self.model.save_model(model_path, file_name)
+
+    def load_model(self, model_path) -> None:
+        '''
+        Load model
+        '''
+        if not os.path.isfile(model_path):
+            return
+        
+        self.model.load_state_dict(torch.load(model_path, weights_only=True))
+        self.model.eval()

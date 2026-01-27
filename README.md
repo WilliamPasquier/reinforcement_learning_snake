@@ -59,6 +59,12 @@ Pour démarrer l'agent et le jeu Snake :
 python app.py
 ```
 
+Pour charger un model au lancement :
+
+```bash
+python app.py C:\\fakepath\\model_xx-xx-xx_score-xx_epoch-xx.pth
+```
+
 Une fenêtre `pygame` s'ouvrira et affichera l'agent en train d'apprendre à jouer.
 
 ---
@@ -102,6 +108,8 @@ state = [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0]
 
 Les paramètres du projet se trouvent dans le module **rlsnake**, il est possible de les modifier afin de changer l'application ainsi que son fonctionnement.
 
+Dans le fichier **rlsnake/rlshelper.py** se trouve les configurations concernant la possibilité d'enregister le model ou d'afficher le graphiques de l'évolution des scores.
+
 Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la logique et le fonctionnement du projet.
 
 ### Résultat
@@ -114,6 +122,12 @@ Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la l
 <p >
   <img src="./images/RLSNAKE_0th_epoch.gif" width="50%" align="left">
   <img src="./images/RLSNAKE_800th_epoch.gif" width="50%" align="right">
+</p>
+
+Evolution du score et de la moyenne du score du modèle après 1000 epoch
+
+<p align="center">
+  <img src="./images/1000th_epoch.png" width="50%">
 </p>
 
 ## Auteur

@@ -7,7 +7,7 @@ from rlsnake import rlshelper
 
 class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
-        super().__init__()
+        super(Linear_QNet, self).__init__()
         self.Linear1 = nn.Linear(input_size, hidden_size)
         self.Linear2 = nn.Linear(hidden_size, output_size)
 
@@ -22,7 +22,6 @@ class Linear_QNet(nn.Module):
 
         path = os.path.join(model_path, file_name)
         torch.save(self.state_dict(), path)
-        
 
 class QTrainer:
     def __init__(self, model, learning_rate, gamma):
