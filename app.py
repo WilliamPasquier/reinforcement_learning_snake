@@ -1,5 +1,7 @@
-from game import SnakeRLGame
 from agent import Agent
+from game import SnakeRLGame
+from helper import plot
+from rlsnake import rlshelper
 
 def train() -> None:
     '''
@@ -9,11 +11,15 @@ def train() -> None:
     agent = Agent()
     record = 0
 
+    # Plot list
+    plot_scores = []
+    plot_mean_scores = []
+    total_score = 0
+
     while True:
         previous_state = game.get_state()
         final_move = agent.get_action(previous_state)
         is_done, reward, score = game.play_step(final_move)
-        # is_done, reward, score = game.play_step(None)
         new_state = game.get_state()
         agent.train_short_memory(previous_state, final_move, reward, new_state, is_done)
         agent.remember(previous_state, final_move, reward, new_state, is_done)
@@ -24,6 +30,14 @@ def train() -> None:
             agent.train_long_memory()
             record = max(record, score)
             print('Game', agent.n_games, 'Score', score, 'Record:', record)
+
+            # Plot score and mean score
+            if rlshelper.Settings.PLOT.value:
+                plot_scores.append(score)
+                total_score += score
+                mean_score = total_score / agent.n_games
+                plot_mean_scores.append(mean_score)
+                plot(plot_scores, plot_mean_scores)
 
 if __name__ == '__main__':
     print("Reinforcement Learning Snake agent")
