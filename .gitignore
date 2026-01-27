@@ -192,6 +192,8 @@ pyrightconfig.json
 .history
 .ionide
 
+.vscode
+
 ### Virtual environnement
 /rl_snake
 
