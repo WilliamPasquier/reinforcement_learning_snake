@@ -33,13 +33,13 @@ python3 -m venv ./rl_snake
 
 ### Activer l'environnement virtuel
 
-Sur macOS / Linux :
+- Sur macOS / Linux :
 
 ```bash
 source rl_snake/bin/activate
 ```
 
-Sur Windows :
+- Sur Windows :
 
 ```bash
 rl_snake\\Scripts\\activate
@@ -107,6 +107,7 @@ Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la l
 ### Résultat
 
 ---
+
 <p style="font-size:25px">
 <pre>              <b>Départ ~ 0-10ème epoch</b>                                           <b>Après ~ 800 epoch</pre>
 </p>
