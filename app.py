@@ -28,8 +28,12 @@ def train() -> None:
             game.reset()
             agent.n_games += 1
             agent.train_long_memory()
-            record = max(record, score)
             print('Game', agent.n_games, 'Score', score, 'Record:', record)
+
+            # Save model
+            if rlshelper.Settings.SAVE_MODEL.value and score > record:
+                agent.save_model()
+                record = score
 
             # Plot score and mean score
             if rlshelper.Settings.PLOT.value:

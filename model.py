@@ -1,7 +1,9 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
+from rlsnake import rlshelper
 
 class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -12,6 +14,15 @@ class Linear_QNet(nn.Module):
     def forward(self, x):
         x_1 = F.relu(self.Linear1(x))
         return self.Linear2(x_1)
+
+    def save_model(self, model_path, file_name):
+        # Check if path exist
+        if not os.path.exists(model_path):
+            os.makedirs(model_path)
+
+        path = os.path.join(model_path, file_name)
+        torch.save(self.state_dict(), path)
+        
 
 class QTrainer:
     def __init__(self, model, learning_rate, gamma):

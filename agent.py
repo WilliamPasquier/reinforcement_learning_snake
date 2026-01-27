@@ -1,8 +1,10 @@
+import os
 import random
 import torch
 from collections import deque
+from datetime import datetime
 from model import Linear_QNet, QTrainer
-from rlsnake import rlsmodel
+from rlsnake import rlsmodel, rlshelper
 
 class Agent:
     '''
@@ -76,3 +78,15 @@ class Agent:
             final_move[move] = 1
 
         return final_move
+    
+    def save_model(self):
+        '''
+        Save model
+        '''
+        now = datetime.now()
+        date_str = now.strftime("%Y-%m-%d")
+
+        model_path = os.path.join(rlshelper.Settings.MODEL_PATH.value, date_str)
+        file_name = f'model_epoch_{self.n_games}.pth'
+
+        self.model.save_model(model_path, file_name)

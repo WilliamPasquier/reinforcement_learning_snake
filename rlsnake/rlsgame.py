@@ -1,16 +1,5 @@
 from enum import Enum
 
-class Color(Enum):
-    '''
-    Colors
-    '''
-    WHITE = (255, 255, 255)
-    BLACK = (38, 38, 38)
-    RED = (200, 0, 0)
-    GREEN = (29, 191, 72)
-    BLUE1 = (0, 0, 255)
-    BLUE2 = (0, 100, 255)
-
 class Settings(Enum):
     '''
     Pygame settings
@@ -18,7 +7,7 @@ class Settings(Enum):
     WINDOW_WIDTH = 640
     WINDOW_HEIGHT = 640
     BLOCK_SIZE = 20
-    SPEED = 80
+    SPEED = 200
     FONT_PATH = './font/arial.ttf'
 
 class Direction(Enum):
@@ -60,3 +49,14 @@ DANGER_PATTERN = {
         Direction.DOWN
     ],
 }
+
+class Color(Enum):
+    '''
+    Colors
+    '''
+    WHITE = (255, 255, 255)
+    BLACK = (38, 38, 38)
+    RED = (200, 0, 0)
+    GREEN = (29, 191, 72)
+    BLUE1 = (0, 0, 255)
+    BLUE2 = (0, 100, 255)
