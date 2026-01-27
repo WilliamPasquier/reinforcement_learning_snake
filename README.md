@@ -108,9 +108,24 @@ state = [1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0]
 
 Les paramètres du projet se trouvent dans le module **rlsnake**, il est possible de les modifier afin de changer l'application ainsi que son fonctionnement.
 
+Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la logique et le fonctionnement du projet.
+
 Dans le fichier **rlsnake/rlshelper.py** se trouve les configurations concernant la possibilité d'enregister le model ou d'afficher le graphiques de l'évolution des scores.
 
-Cependant **attention** à l'ordre des listes ! Elles sont importantes dans la logique et le fonctionnement du projet.
+Les model s'enregistre à la racine du projet dans un dossier *model*
+```bash
+./model
+└── 2026-01-27
+    ├── model_14-42-58_score-1_epoch-17.pth
+    ├── model_14-43-51_score-2_epoch-60.pth
+    ├── model_14-45-35_score-3_epoch-87.pth
+    ├── model_14-46-00_score-4_epoch-97.pth
+    ├── model_14-46-41_score-14_epoch-109.pth
+    ├── model_14-48-47_score-21_epoch-129.pth
+    ├── model_14-54-05_score-47_epoch-167.pth
+    └── model_14-55-13_score-55_epoch-176.pth
+```
+Il suffit d'en récupérer le chemin afin de le charger, comme expliqué dans le guide de démarrage
 
 ### Résultat
 
