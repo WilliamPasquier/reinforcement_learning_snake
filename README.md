@@ -88,10 +88,10 @@ L'état de chaque étape est constitué sous la forme d'une liste composée selo
   # Direction droite (point de vue de l'environnement),
   # Direction bas (point de vue de l'environnement),
   # Direction gauche (point de vue de l'environnement),
-  # Coordonnée x de la nouriture < que la coordonnée x de la tête de l'agent,
-  # Coordonnée x de la nouriture > que la coordonnée x de la tête de l'agent,
-  # Coordonnée y de la nouriture < que la coordonnée y de la tête de l'agent,
-  # Coordonnée y de la nouriture > que la coordonnée y de la tête de l'agent,
+  # Nourriture à gauche,
+  # Nourriture à droite,
+  # Nourriture en haut,
+  # Nourriture en bas
 ]
 
 # Exemple d'état
