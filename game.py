@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 from collections import namedtuple
 from random import randint
-from rlsnake import rlsgame
+from rlsnake import rlsgame, rlshelper
 
 point = namedtuple('Point', 'x, y')
 pygame.init()
@@ -214,10 +214,11 @@ class SnakeRLGame:
             )
         )
 
-        self.__display_coordonate(self.head, "Snake head", [20, 20])
-        self.__display_coordonate(self.food, "Food", [20, 40])
-        self.__display_score([20, 60])
-        self.__display_state(current_state, 80, 20)
+        if rlshelper.Settings.DISPLAY_INFO.value == True:
+            self.__display_coordonate(self.head, "Snake head", [20, 20])
+            self.__display_coordonate(self.food, "Food", [20, 40])
+            self.__display_score([20, 60])
+            self.__display_state(current_state, 80, 20)
 
         pygame.display.flip()
 
