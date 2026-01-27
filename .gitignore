@@ -195,4 +195,7 @@ pyrightconfig.json
 ### Virtual environnement
 /rl_snake
 
+### Model 
+model/
+
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
