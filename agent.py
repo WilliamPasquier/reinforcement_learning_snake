@@ -21,6 +21,7 @@ class Agent:
             rlsmodel.Network.OUTPUT.value
         )
         self.trainer = QTrainer(self.model, rlsmodel.Memory.LEARNING_RATE.value, self.gamma)
+        self.is_model_load = False
 
     def remember(self, previous_state, action, reward, new_state, is_done) -> None:
         '''
@@ -68,7 +69,7 @@ class Agent:
         '''
         self.epsilon = 80 - self.n_games
         final_move = [0, 0, 0]
-        if random.randint(0, 200) < self.epsilon:
+        if random.randint(0, 200) < self.epsilon and self.is_model_load == False:
             move = random.randint(0, 2)
             final_move[move] = 1
         else:
@@ -101,3 +102,4 @@ class Agent:
         
         self.model.load_state_dict(torch.load(model_path, weights_only=True))
         self.model.eval()
+        self.is_model_load = True

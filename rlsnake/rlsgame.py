@@ -7,7 +7,7 @@ class Settings(Enum):
     WINDOW_WIDTH = 640
     WINDOW_HEIGHT = 640
     BLOCK_SIZE = 20
-    SPEED = 80
+    SPEED = 150
     FONT_PATH = './font/arial.ttf'
 
 class Direction(Enum):

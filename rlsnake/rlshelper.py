@@ -6,7 +6,7 @@ class Settings(Enum):
     Can toggle features
     '''
     PLOT_DATA = False
-    SAVE_MODEL = True 
+    SAVE_MODEL = False 
     MODEL_PATH = './model'
-    DISPLAY_INFO = False
+    DISPLAY_INFO = True
     DISPLAY_SENSOR = False

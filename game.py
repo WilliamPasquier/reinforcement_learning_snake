@@ -224,10 +224,10 @@ class SnakeRLGame:
         if rlshelper.Settings.DISPLAY_SENSOR.value == True:
             sensor = self.__get_sensor_point()
             for pt in sensor.values():
-                if pt not in self.snake or pt != self.food:
+                if pt not in self.snake and pt != self.food:
                     pygame.draw.rect(
                         self.display, 
-                        rlsgame.Color.ORANGE.value, 
+                        rlsgame.Color.ORANGE2.value, 
                         pygame.Rect(
                             pt.x,
                             pt.y,
