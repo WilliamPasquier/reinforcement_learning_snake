@@ -7,7 +7,7 @@ class Settings(Enum):
     WINDOW_WIDTH = 640
     WINDOW_HEIGHT = 640
     BLOCK_SIZE = 20
-    SPEED = 200
+    SPEED = 80
     FONT_PATH = './font/arial.ttf'
 
 class Direction(Enum):
@@ -60,3 +60,5 @@ class Color(Enum):
     GREEN = (29, 191, 72)
     BLUE1 = (0, 0, 255)
     BLUE2 = (0, 100, 255)
+    ORANGE = (232, 103, 31)
+    ORANGE2 = (229, 146, 83)

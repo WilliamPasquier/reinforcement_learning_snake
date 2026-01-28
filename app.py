@@ -35,12 +35,13 @@ def train(game: SnakeRLGame, agent:Agent) -> None:
             print('Game', agent.n_games, 'Score', score, 'Record:', record)
 
             # Save model
-            if rlshelper.Settings.SAVE_MODEL.value and score > record:
-                agent.save_model(score)
+            if score > record:
+                if rlshelper.Settings.SAVE_MODEL.value:
+                    agent.save_model(score)
                 record = score
 
             # Plot score and mean score
-            if rlshelper.Settings.PLOT.value:
+            if rlshelper.Settings.PLOT_DATA.value:
                 plot_scores.append(score)
                 total_score += score
                 mean_score = total_score / agent.n_games

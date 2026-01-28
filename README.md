@@ -18,6 +18,8 @@ Le projet utilise **Python 3.13 ou supérieur** ainsi que les bibliothèques sui
 - [pygame](https://www.pygame.org/docs/)
 - [numpy](https://numpy.org/doc/)
 - [torch / torchvision](https://pytorch.org/docs/stable/index.html)
+- [matplotlib](https://matplotlib.org/stable/index.html)
+- [ipython](https://ipython.readthedocs.io/en/stable/)
 
 ---
 

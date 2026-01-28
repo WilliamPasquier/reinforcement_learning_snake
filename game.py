@@ -64,8 +64,9 @@ class SnakeRLGame:
         If the food spawns on the snake, a new position is generated.
 
         '''
-        x_coordonate = randint(0, (self.w - rlsgame.Settings.BLOCK_SIZE.value) // rlsgame.Settings.BLOCK_SIZE.value) * rlsgame.Settings.BLOCK_SIZE.value
-        y_coordonate = randint(0, (self.h - rlsgame.Settings.BLOCK_SIZE.value) // rlsgame.Settings.BLOCK_SIZE.value) * rlsgame.Settings.BLOCK_SIZE.value
+        offset = rlsgame.Settings.BLOCK_SIZE.value
+        x_coordonate = randint(0, (self.w - offset) // offset) * offset
+        y_coordonate = randint(0, (self.h - offset) // offset) * offset
         self.food = point(x_coordonate, y_coordonate)
         if self.food in self.snake:
             self.__place_food()
@@ -219,6 +220,21 @@ class SnakeRLGame:
             self.__display_coordonate(self.food, "Food", [20, 40])
             self.__display_score([20, 60])
             self.__display_state(current_state, 80, 20)
+
+        if rlshelper.Settings.DISPLAY_SENSOR.value == True:
+            sensor = self.__get_sensor_point()
+            for pt in sensor.values():
+                if pt not in self.snake or pt != self.food:
+                    pygame.draw.rect(
+                        self.display, 
+                        rlsgame.Color.ORANGE.value, 
+                        pygame.Rect(
+                            pt.x,
+                            pt.y,
+                            rlsgame.Settings.BLOCK_SIZE.value,
+                            rlsgame.Settings.BLOCK_SIZE.value
+                        )
+                    )
 
         pygame.display.flip()
 
