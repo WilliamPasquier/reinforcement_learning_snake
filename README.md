@@ -135,7 +135,7 @@ Il suffit d'en récupérer le chemin afin de le charger, comme expliqué dans le
 
 <p style="font-size:25px">
   <pre>
-                    <b>Départ ~ 0-10ème epoch</b>                     <b>Après ~ 800 epoch</b>
+                <b>Départ ~ 0-10ème epoch</b>                         <b>Après ~ 800 epoch</b>
   </pre>
 </p>
 <p >
