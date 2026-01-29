@@ -98,7 +98,7 @@ class Agent:
         Load model
         '''
         if not os.path.isfile(model_path):
-            return
+            raise FileNotFoundError
         
         self.model.load_state_dict(torch.load(model_path, weights_only=True))
         self.model.eval()

@@ -57,6 +57,9 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 1:
         model_path = sys.argv[1]
-        agent.load_model(model_path)
+        try:
+            agent.load_model(model_path)
+        except FileNotFoundError:
+            print(f"WARNING ! This file {model_path} may not exist\nApp launched without any model")
         
     train(environnement, agent)
